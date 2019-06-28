@@ -1,0 +1,7 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'odyssey'
+include 'module-service', 'module-api', 'module-core'
