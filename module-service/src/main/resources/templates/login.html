@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+
+	<title>Login</title>
+
+	<!-- Required Stylesheets -->
+	<link href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" rel="stylesheet" type="text/css"/>
+
+	<!-- Required scripts -->
+	<script src="https://unpkg.com/vue"></script>
+	<script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+<form action="login" method="post" name="frm">
+	<!-- Our application root element -->
+	<div id="app">
+		<b-container>
+			<b-jumbotron header="Welcome to Odyssey Project"
+			             lead="">
+			</b-jumbotron>
+
+			<b-form-group :label-cols="3"
+			              description="Let us know your name."
+			              horizontal
+			              label="Member Id"
+			>
+				<b-form-input name="id" v-model.trim="username"></b-form-input>
+			</b-form-group>
+			<b-form-group :label-cols="3"
+			              description="Let us know your password."
+			              horizontal
+			              label="Password"
+			>
+				<input class="form-control" name="password" type="password" v-model.trim="password">
+			</b-form-group>
+
+			<b-alert :show="showAlert" variant="danger">{{ errMsg }}</b-alert>
+
+			<b-btn @click="jssubmit" variant="primary">Login</b-btn>
+		</b-container>
+	</div>
+</form>
+
+<!-- Start running your app -->
+<script>
+	window.app = new Vue({
+		el: "#app",
+		data: {
+			username: '',
+			password: '',
+			showAlert: false,
+			errMsg: ''
+		},
+		methods: {
+			jssubmit: function () {
+				if (this.username == '') {
+					this.showAlert = true;
+					this.errMsg = 'Please enter your username';
+					return;
+				}
+				if (this.password == '') {
+					this.showAlert = true;
+					this.errMsg = 'Please enter the password';
+					return;
+				}
+				this.showAlert = false;
+				document.frm.submit();
+			}
+		}
+	})
+</script>
+
+</body>
+</html>

@@ -7,11 +7,15 @@ jar {
 
 dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    
-    runtime('com.h2database:h2')
 
+//    runtime('com.h2database:h2')
+    implementation('com.h2database:h2')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

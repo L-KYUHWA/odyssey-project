@@ -3,5 +3,7 @@ dependencies {
     compile project(':module-core')
     
     implementation('org.springframework.boot:spring-boot-starter-web')
-    
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }
