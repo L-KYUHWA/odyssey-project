@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberRepository extends CrudRepository<MemberEntity, Long> {
-	MemberEntity findByMemberIdAndMemberPassword(String memberId, String memberPassword);
+	MemberEntity findByMemberId(String memberId);
 }

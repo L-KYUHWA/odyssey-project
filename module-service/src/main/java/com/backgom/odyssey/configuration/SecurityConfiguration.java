@@ -35,11 +35,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable();        // 개발 시 에만
+		http.csrf().disable();
 
 		http.authorizeRequests()
-				.antMatchers("/user/**").access("ROLE_USER")                // 사용자 페이지
-				.antMatchers("/admin/**").access("ROLE_ADMIN")                // 관리자 페이지
 				.antMatchers("/login").permitAll()
 				.antMatchers("/**").authenticated();
 
@@ -66,8 +64,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/css/**",
 						"/js/**",
 						"/images/**",
-						"/console/**",
-						"/api/**");
+						"/console/**");
+//						,"/api/**");
 	}
 
 }

@@ -14,6 +14,11 @@
 
   export default {
     name: "LocationDetailModal",
+    head: {
+      script: [
+        {src: 'http//dapi.kakao.com/v2/maps/sdk.js?appkey=a980d54adf8bad772487124ad061074b'}
+      ]
+    },
     data() {
       return {
         show: false,

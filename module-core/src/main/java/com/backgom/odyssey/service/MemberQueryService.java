@@ -20,7 +20,7 @@ public class MemberQueryService {
 	private MemberRepository memberRepository;
 
 	public MemberDto findMember(MemberDto memberDto) {
-		MemberEntity entity = memberRepository.findByMemberIdAndMemberPassword(memberDto.getMemberId(), memberDto.getMemberPassword());
+		MemberEntity entity = memberRepository.findByMemberId(memberDto.getMemberId());
 		return converter.convertDtoFromEntity(entity);
 	}
 

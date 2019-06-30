@@ -12,10 +12,10 @@
 <script>
   export default {
     name: "LocationList",
-    props: ['searchResult'],
+    props: ['result'],
     data() {
       return {
-        items: this.searchResult,
+        items: this.result,
         fields: [
           {
             key: 'id',
@@ -44,7 +44,7 @@
       onRowClick(selectedItem) {
         this.$emit('show-detail-modal', selectedItem);
       }
-    }
+    },
   }
 </script>
 

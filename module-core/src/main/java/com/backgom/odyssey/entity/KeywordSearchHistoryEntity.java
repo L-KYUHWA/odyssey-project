@@ -16,10 +16,10 @@ import java.util.Date;
 @Setter
 @ToString
 @Entity
-@Table(name = "members")
+@Table(name = "keyword_search_history")
 @EqualsAndHashCode(of = "id")
 @Accessors(chain = true)
-public class MemberEntity {
+public class KeywordSearchHistoryEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +28,11 @@ public class MemberEntity {
 	@Column(length = 100, nullable = false)
 	private String memberId;
 
-	@Column(length = 200, nullable = false)
-	private String memberPassword;
+	@Column
+	private String keyword;
 
-	@Column(length = 100, nullable = false)
-	private String memberRole;
+	@Column
+	private Long count;
 
 	@CreatedDate
 	@Column(updatable = false)

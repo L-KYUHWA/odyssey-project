@@ -1,4 +1,4 @@
-package com.backgom.odyssey.controller;
+package com.backgom.odyssey.support;
 
 import lombok.Getter;
 import lombok.Setter;

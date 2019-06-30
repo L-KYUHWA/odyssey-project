@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Component()
@@ -37,23 +38,23 @@ public class AuthProvider implements AuthenticationProvider {
 				.setMemberId(id)
 				.setMemberPassword(bCryptPasswordEncoder.encode(pw));
 
-//		MemberDto findedMember = memberQueryService.findMember(memberDto);
-//		if (Objects.isNull(findedMember)) {
-//			log.error("{} is not exist or password is not equals", id);
-//			return null;
-//		}
-//
-//		if (findedMember.getMemberPassword().equals(pw)) {
-//			log.error("{} is not exist or password is not equals", id);
-//			return null;
-//		}
+		MemberDto foundMember = memberQueryService.findMember(memberDto);
 
+		if (Objects.isNull(foundMember)) {
+			log.error("{} is not exist or password is not equals", id);
+			return null;
+		}
+
+		if (!bCryptPasswordEncoder.matches(pw, foundMember.getMemberPassword())) {
+			log.error("{} is not exist or password is not equals", id);
+			return null;
+		}
+
+		//임시 role 부여
 		List<GrantedAuthority> authList = new ArrayList<>();
-		/**
-		 * Role 처리 필요, 일단 임의로 USER Role을 부여한다.
-		 **/
 		authList.add(new SimpleGrantedAuthority("ROLE_USER"));
-		return new MyAuthentication(id, pw, authList, memberDto);
+
+		return new OdysseyAuthentication(id, pw, authList, memberDto);
 	}
 
 	@Override

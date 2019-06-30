@@ -10,12 +10,12 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MyAuthentication extends UsernamePasswordAuthenticationToken {
+public class OdysseyAuthentication extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = 1L;
 	private MemberDto member;
 
-	public MyAuthentication(String id, String pw, List<GrantedAuthority> authList, MemberDto member) {
+	public OdysseyAuthentication(String id, String pw, List<GrantedAuthority> authList, MemberDto member) {
 		super(id, pw, authList);
 		this.member = member;
 	}

@@ -1,5 +1,7 @@
 package com.backgom.odyssey.provider;
 
+import com.backgom.odyssey.dto.KeywordSearchCondition;
+import com.backgom.odyssey.service.KeywordSearchHistoryCommandService;
 import com.sun.jndi.toolkit.url.Uri;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +16,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.MalformedURLException;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -21,14 +24,28 @@ public class PlaceSearchProvider {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private KeywordSearchHistoryCommandService keywordSearchHistoryCommandService;
 
-	public String findPlacesByKeyword(String keyword) {
+	public String findPlaces(KeywordSearchCondition keywordSearchCondition) {
+
+		if (Objects.isNull(keywordSearchCondition.getKeyword())) {
+			return StringUtils.EMPTY;
+		}
 
 		String uri = buildUri();
-		HttpEntity httpEntity = buildHttpEntity(keyword);
+		MultiValueMap<String, String> parameterMap = buildParameters(keywordSearchCondition);
+		HttpEntity httpEntity = buildHttpEntity(parameterMap);
 
-		ResponseEntity<String> response = restTemplate.postForEntity(uri, httpEntity, String.class);
-		return response.getBody();
+		try {
+			ResponseEntity<String> response = restTemplate.postForEntity(uri, httpEntity, String.class);
+			keywordSearchHistoryCommandService.saveHistory(keywordSearchCondition.getKeyword());
+			return response.getBody();
+		} catch (Exception e) {
+			log.warn("[PlaceSearchProvider] Unable to fetch API", e);
+		}
+
+		return StringUtils.EMPTY;
 	}
 
 	private String buildUri() {
@@ -40,23 +57,21 @@ public class PlaceSearchProvider {
 		return StringUtils.EMPTY;
 	}
 
-	private MultiValueMap<String, String> buildParameters(String keyword) {
+	private MultiValueMap<String, String> buildParameters(KeywordSearchCondition keywordSearchCondition) {
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("x", "127.06283102249932");
-		parameters.add("y", "37.514322572335935");
 		parameters.add("radius", "20000");
-		parameters.add("query", keyword);
+		parameters.add("query", keywordSearchCondition.getKeyword());
+		parameters.add("page", String.valueOf(keywordSearchCondition.getPageNumber()));
+		parameters.add("size", String.valueOf(keywordSearchCondition.getPageSize()));
 		return parameters;
 	}
 
-	private HttpEntity buildHttpEntity(String keyword) {
+	private HttpEntity buildHttpEntity(MultiValueMap<String, String> parameterMap) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "KakaoAK 3f75896063f89f451cfc92dcb07a9544");
 		headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
 		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
-
-		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(buildParameters(keyword), headers);
-		return request;
+		return new HttpEntity<>(parameterMap, headers);
 	}
 
 }
