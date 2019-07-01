@@ -20,7 +20,7 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'idea'
 
-    group = 'com.bkjeon.admin'
+    group = 'com.backgom'
     version = '0.0.0'
     sourceCompatibility = 1.8
 
