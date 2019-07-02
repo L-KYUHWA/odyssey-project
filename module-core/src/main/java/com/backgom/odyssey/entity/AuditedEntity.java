@@ -17,6 +17,8 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class AuditedEntity implements Serializable {
 
+	//MySql 기준 - BaseEntity 로 상속 받아 Entity 생성
+
 	@CreatedDate
 	@Column(updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)

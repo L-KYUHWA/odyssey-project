@@ -25,7 +25,7 @@ public class MemberEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 100, nullable = false, unique = true)
 	private String memberId;
 
 	@Column(length = 200, nullable = false)

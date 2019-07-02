@@ -4,13 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Accessors(chain = true)
 public class KeywordSearchHistoryDto {
-
+	private long id;
 	private String memberId;
 	private String keyword;
 	private Long count;
-
+	private Date createAt;
+	private Date modifiedAt;
+	private String createdBy;
+	private String modifiedBy;
 }

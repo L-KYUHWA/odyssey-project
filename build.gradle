@@ -20,28 +20,31 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'idea'
 
-    group = 'com.bkjeon.admin'
+    compileJava.options.encoding = 'UTF-8'
+    
+    group = 'com.backgom'
     version = '0.0.0'
     sourceCompatibility = 1.8
 
     repositories {
+        jcenter()
         mavenCentral()
     }
 
 
-    task initSourceFolders {
-        sourceSets*.java.srcDirs*.each {
-            if( !it.exists() ) {
-                it.mkdirs()
-            }
-        }
-
-        sourceSets*.resources.srcDirs*.each {
-            if( !it.exists() ) {
-                it.mkdirs()
-            }
-        }
-    }
+//    task initSourceFolders {
+//        sourceSets*.java.srcDirs*.each {
+//            if( !it.exists() ) {
+//                it.mkdirs()
+//            }
+//        }
+//
+//        sourceSets*.resources.srcDirs*.each {
+//            if( !it.exists() ) {
+//                it.mkdirs()
+//            }
+//        }
+//    }
 
     dependencies {
         compile 'org.apache.logging.log4j:log4j-api:2.11.2'

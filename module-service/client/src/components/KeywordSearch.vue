@@ -8,7 +8,6 @@
       </b-col>
       <b-col>
         <b-form-input :placeholder="placeHolder" v-model="keyword"></b-form-input>
-        <div class="mt-2">Value: {{ keyword }}</div>
       </b-col>
       <b-col>
         <b-button
@@ -26,7 +25,7 @@
     name: "KeywordSearchBar",
     data() {
       return {
-        placeHolder: "Keyword",
+        placeHolder: "Please Input Keyword",
         keyword: ''
       }
     },

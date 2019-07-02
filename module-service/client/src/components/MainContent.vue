@@ -4,68 +4,127 @@
       @location-search="onSearchByLocationKeyword">
     </keyword-search>
 
-    <location-list
-            :result="searchResult"
-            @show-detail-modal="showDetailModal"
-    ></location-list>
+    <b-table
+      :fields="fields"
+      :items="searchResult"
+      :style="searchResultVisibility"
+      @row-clicked="showDetailModal"
+      hover>
+    </b-table>
 
     <location-detail-modal
       ref="detailModal">
     </location-detail-modal>
 
     <b-pagination
-            :per-page="pageSize"
-            :total-rows="totalItemCount"
-            @change="onSearchByLocationKeyword"
-            v-model="currentPage"
+      :per-page="pageSize"
+      :style="searchResultVisibility"
+      :total-rows="totalItemCount"
+      @change="onPageChange"
+      v-model="currentPage"
     ></b-pagination>
 
+    <b-row>
+      <b-col>
+        <keyword-rank
+          ref="keywordRanking">
+        </keyword-rank>
+      </b-col>
+      <b-col>
+        <my-keyword-history
+          ref="keywordHistory">
+        </my-keyword-history>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
   import KeywordSearch from './KeywordSearch'
-  import LocationList from "./LocationList";
   import LocationDetailModal from "./LocationDetailModal"
+  import KeywordRank from "./KeywordRank"
+  import MyKeywordHistory from "./MyKeywordHistory"
 
   export default {
     name: "MainContent",
+    computed: {
+      searchResultVisibility() {
+        if (this.searchResult) {
+          return '';
+        }
+
+        return 'display:none'
+      }
+    },
     data() {
       return {
         searchResult: null,
         totalItemCount: 0,
-        pageSize: 15,
+        pageSize: 10,
         currentPage: 1,
+        keyword: '',
+        fields: [
+          {
+            key: 'id',
+            label: 'ID',
+            sortable: true
+          },
+          {
+            key: 'place_name',
+            label: '지역명',
+            sortable: true
+          },
+          {
+            key: 'address_name',
+            label: '구 주소',
+            sortable: true
+          },
+          {
+            key: 'road_address_name',
+            label: '신 주소',
+            sortable: false
+          },
+          {
+            key: 'phone',
+            label: '전환번호',
+            sortable: false
+          }
+        ],
       }
     },
     components: {
-      LocationList,
       KeywordSearch,
-      LocationDetailModal
+      LocationDetailModal,
+      KeywordRank,
+      MyKeywordHistory
     },
     methods: {
+      onPageChange(pageNumber) {
+        this.currentPage = pageNumber;
+        this.onSearchByLocationKeyword();
+      },
       onSearchByLocationKeyword(keyword) {
-        fetch("/api/search?keyword=" + keyword + "&pageNumber=" + this.currentPage + "&pageSize=" + this.pageSize, {
-          method: 'GET'
-        }).then((response) => {
-          return response.json();
-        }).then((data) => {
-          if ('FAIL' === data.status) {
-            alert("Fail to get search result");
-          }
+        if (keyword) {
+          this.keyword = keyword;
+        }
 
-          const stringifyResult = JSON.stringify(data.result);
-          const parsedResult = JSON.parse(stringifyResult);
-          this.searchResult = parsedResult.documents;
-          // this.totalItemCount = parsedResult.meta.total_count;
-
-          console.log("1-----------" + this.searchResult);
-          console.log("2-----------" + this.totalItemCount);
-
+        const searchUrl = "/api/search?keyword=" + this.keyword + "&pageNumber=" + this.currentPage + "&pageSize=" + this.pageSize
+        this.$axios.get(`${searchUrl}`)
+          .then((result) => {
+            this.searchResult = result.data.result.documents;
+            this.totalItemCount = result.data.result.meta.total_count;
+          })
+          .then(() => {
+            this.$refs.keywordRanking.updateList();
+            this.$refs.keywordHistory.updateList();
         });
+
       },
       showDetailModal(selectedItem) {
         this.$refs.detailModal.showModal(selectedItem);
+      },
+      onRowClick(selectedItem) {
+        this.$emit('show-detail-modal', selectedItem);
       }
     }
   }

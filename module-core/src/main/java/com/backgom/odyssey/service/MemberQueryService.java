@@ -19,14 +19,9 @@ public class MemberQueryService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	public MemberDto findMember(MemberDto memberDto) {
+	public MemberDto findByMember(MemberDto memberDto) {
 		MemberEntity entity = memberRepository.findByMemberId(memberDto.getMemberId());
 		return converter.convertDtoFromEntity(entity);
 	}
 
-	public Iterable<MemberEntity> findAllMembers() {
-		Iterable<MemberEntity> all = memberRepository.findAll();
-		all.forEach(aa -> log.warn(aa.toString()));
-		return all;
-	}
 }
