@@ -101,18 +101,26 @@
     methods: {
       onPageChange(pageNumber) {
         this.currentPage = pageNumber;
-        this.onSearchByLocationKeyword();
+        this.onSearchByLocationKeyword(this.keyword);
       },
       onSearchByLocationKeyword(keyword) {
-        if (keyword) {
-          this.keyword = keyword;
+        if (!keyword) {
+          alert('Please Input Search Keyword');
+          return;
         }
 
+        this.keyword = keyword;
         const searchUrl = "/api/search?keyword=" + this.keyword + "&pageNumber=" + this.currentPage + "&pageSize=" + this.pageSize
         this.$axios.get(`${searchUrl}`)
           .then((result) => {
-            this.searchResult = result.data.result.documents;
-            this.totalItemCount = result.data.result.meta.total_count;
+
+            if (result.data.statusCode !== 'SUCCESS') {
+              console.log("search request error : " + result);
+              return;
+            }
+
+            this.searchResult = result.data.response.documents;
+            this.totalItemCount = result.data.response.meta.total_count;
           })
           .then(() => {
             this.$refs.keywordRanking.updateList();

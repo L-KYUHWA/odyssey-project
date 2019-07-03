@@ -5,5 +5,4 @@ pluginManagement {
 }
 rootProject.name = 'odyssey'
 include 'module-service'
-include 'module-api'
 include 'module-core'

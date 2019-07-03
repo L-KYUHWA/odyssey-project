@@ -1,13 +1,13 @@
 package com.backgom.odyssey.configuration;
 
 import com.backgom.odyssey.dto.MemberDto;
+import com.backgom.odyssey.exception.AuthException;
 import com.backgom.odyssey.service.MemberQueryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,13 +27,13 @@ public class AuthProvider implements AuthenticationProvider {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+	public Authentication authenticate(Authentication authentication) throws AuthException {
 		String userId = authentication.getName();
 		String userPw = authentication.getCredentials().toString();
 		return authenticate(userId, userPw);
 	}
 
-	private Authentication authenticate(String id, String pw) throws AuthenticationException {
+	private Authentication authenticate(String id, String pw) throws AuthException {
 		MemberDto memberDto = new MemberDto()
 				.setMemberId(id)
 				.setMemberPassword(bCryptPasswordEncoder.encode(pw));

@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Slf4j
 @Service
-public class KeywordHistoryFacade {
+public class KeywordHistoryService {
 
 	@Autowired
 	private KeywordSearchHistoryQueryService queryService;

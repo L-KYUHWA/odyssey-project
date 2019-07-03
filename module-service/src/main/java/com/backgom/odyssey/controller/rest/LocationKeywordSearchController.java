@@ -2,7 +2,7 @@ package com.backgom.odyssey.controller.rest;
 
 import com.backgom.odyssey.dto.KeywordSearchCondition;
 import com.backgom.odyssey.provider.PlaceSearchProvider;
-import com.backgom.odyssey.support.RequestResult;
+import com.backgom.odyssey.support.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +15,9 @@ public class LocationKeywordSearchController {
 
 	@GetMapping("search")
 	@ResponseBody
-	public RequestResult search(@ModelAttribute KeywordSearchCondition keywordSearchCondition) {
+	public ResponseEntity search(@ModelAttribute KeywordSearchCondition keywordSearchCondition) {
 		Object searchResult = placeSearchProvider.findPlaces(keywordSearchCondition);
-		return new RequestResult(searchResult);
+		return new ResponseEntity(searchResult);
 	}
 
 }

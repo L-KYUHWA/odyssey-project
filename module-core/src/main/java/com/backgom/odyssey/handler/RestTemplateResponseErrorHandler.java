@@ -36,7 +36,7 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
 		if (series == CLIENT_ERROR || series == SERVER_ERROR) {
 			log.error("[API Provider Response Error] An error has occurred in the API Provider. " +
-					"httpMethod : {}, Url : {}, Response status code : {}", method, url, response.getStatusCode());
+					"httpMethod : {}, Url : {}, Response status code : {}, Response message : {}", method, url, response.getStatusCode(), response.getStatusText());
 		}
 
 	}

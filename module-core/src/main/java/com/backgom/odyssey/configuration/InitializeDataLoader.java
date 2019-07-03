@@ -1,6 +1,7 @@
 package com.backgom.odyssey.configuration;
 
 import com.backgom.odyssey.dto.MemberDto;
+import com.backgom.odyssey.dto.MemberRole;
 import com.backgom.odyssey.service.MemberCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -15,20 +16,20 @@ public class InitializeDataLoader implements ApplicationListener<ApplicationRead
 
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
-		seedData();
+		setInitData();
 	}
 
-	private void seedData() {
+	private void setInitData() {
 		MemberDto testMember1 = new MemberDto();
 		testMember1.setMemberId("windsp7");
 		testMember1.setMemberPassword("1234");
-		testMember1.setMemberRole("USER");
+		testMember1.setMemberRole(MemberRole.USER);
 		memberCommandService.saveMember(testMember1);
 
 		MemberDto testMember2 = new MemberDto();
 		testMember2.setMemberId("kakao");
 		testMember2.setMemberPassword("4321");
-		testMember2.setMemberRole("USER");
+		testMember2.setMemberRole(MemberRole.USER);
 		memberCommandService.saveMember(testMember2);
 	}
 

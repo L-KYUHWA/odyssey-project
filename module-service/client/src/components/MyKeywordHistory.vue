@@ -19,10 +19,16 @@
     },
     methods: {
       updateList() {
-        const requestUrl = "/api/my-keyword-history";
+        const requestUrl = "/api/keywords/me";
         this.$axios.get(`${requestUrl}`)
           .then((result) => {
-            this.keywordHistory = result.data;
+
+            if (result.data.statusCode !== 'SUCCESS') {
+              console.log("keyword ranking request error : " + result);
+              return;
+            }
+
+            this.keywordHistory = result.data.response;
           });
       },
       parseDate(modifiedDate) {

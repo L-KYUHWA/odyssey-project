@@ -24,12 +24,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private AuthProvider authProvider;
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth.jdbcAuthentication()
-				.usersByUsernameQuery("select memberId, memberPassword from members where memberId=?")
-				.dataSource(dataSource)
-				.passwordEncoder(bCryptPasswordEncoder);
+	protected void configure(AuthenticationManagerBuilder auth) {
+		//DB direct Auth
+		//doNotThing
 	}
 
 	@Override

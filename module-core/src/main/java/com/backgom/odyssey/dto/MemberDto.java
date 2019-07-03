@@ -12,7 +12,7 @@ import java.util.Date;
 public class MemberDto {
 	private String memberId;
 	private String memberPassword;
-	private String memberRole;
+	private MemberRole memberRole;
 	private Date createAt;
 	private Date modifiedAt;
 	private String createdBy;

@@ -1,5 +1,6 @@
 package com.backgom.odyssey.entity;
 
+import com.backgom.odyssey.dto.MemberRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +32,9 @@ public class MemberEntity {
 	@Column(length = 200, nullable = false)
 	private String memberPassword;
 
+	@Enumerated(EnumType.STRING)
 	@Column(length = 100, nullable = false)
-	private String memberRole;
+	private MemberRole memberRole;
 
 	@CreatedDate
 	@Column(updatable = false)

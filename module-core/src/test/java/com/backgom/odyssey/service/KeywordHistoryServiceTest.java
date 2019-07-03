@@ -12,13 +12,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class KeywordHistoryFacadeTest {
+public class KeywordHistoryServiceTest {
 
 	private static final String TEST_MEMBER = "testMember";
 	private static final String TEST_KEYWORD = "testKeyword";
 	private static final long TEST_COUNT = 1L;
 	@InjectMocks
-	private KeywordHistoryFacade sut;
+	private KeywordHistoryService sut;
 	@Mock
 	private KeywordSearchHistoryQueryService queryService;
 	@Mock

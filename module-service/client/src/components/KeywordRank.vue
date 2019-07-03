@@ -20,10 +20,16 @@
     },
     methods: {
       updateList() {
-        const requestUrl = "/api/rank-keyword";
+        const requestUrl = "/api/keywords/rank";
         this.$axios.get(`${requestUrl}`)
           .then((result) => {
-            this.rankKeywords = result.data;
+
+            if (result.data.statusCode !== 'SUCCESS') {
+              console.log("keyword ranking request error : " + result);
+              return;
+            }
+
+            this.rankKeywords = result.data.response;
           });
       }
     },

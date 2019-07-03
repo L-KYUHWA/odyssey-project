@@ -3,7 +3,7 @@ package com.backgom.odyssey.provider;
 import com.backgom.odyssey.auth.SecurityContext;
 import com.backgom.odyssey.dto.KeywordSearchCondition;
 import com.backgom.odyssey.helper.ObjectMapperHolder;
-import com.backgom.odyssey.service.KeywordHistoryFacade;
+import com.backgom.odyssey.service.KeywordHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class PlaceSearchProvider {
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired
-	private KeywordHistoryFacade keywordHistoryFacade;
+	private KeywordHistoryService keywordHistoryService;
 
 	@Value("${kakao.rest_api.key}")
 	private String apiKey;
@@ -45,7 +45,7 @@ public class PlaceSearchProvider {
 
 		try {
 			ResponseEntity<String> response = restTemplate.postForEntity(uri, httpEntity, String.class);
-			keywordHistoryFacade.saveKeywordHistory(keywordSearchCondition.getKeyword(), SecurityContext.getLoginMember());
+			keywordHistoryService.saveKeywordHistory(keywordSearchCondition.getKeyword(), SecurityContext.getLoginMember());
 			return ObjectMapperHolder.readValue(response.getBody(), Object.class);
 		} catch (Exception e) {
 			log.warn("[PlaceSearchProvider] Unable to fetch API", e);

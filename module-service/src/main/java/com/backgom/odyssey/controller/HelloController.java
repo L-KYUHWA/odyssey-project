@@ -1,5 +1,6 @@
 package com.backgom.odyssey.controller;
 
+import com.backgom.odyssey.exception.BusinessException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,5 +12,10 @@ public class HelloController {
     public String hello() {
         return "Hello Odyssey Service";
     }
+
+	@RequestMapping("aaa")
+	public String aaa() {
+		throw new BusinessException();
+	}
 
 }

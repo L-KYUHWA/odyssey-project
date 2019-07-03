@@ -34,5 +34,7 @@ java -jar ${jarFile Path}
 
 ### TODO 
 1. Vue-Daum-Map 라이브러리 버그
-Modal을 이용해 Component 생성시 1회만 정상작동 함 Map 객채에 위,경도 데이터 정상 맵핑 확인 했으나 맵로딩이 일부만 이루어짐 
+Modal을 이용해 Component 생성시 1회만 정상작동 함 Map 객채에 위,경도 데이터 정상 맵핑 확인 했으나 맵로딩이 일부만 이루어짐
 
+2. 특수문자 처리 - URL unwise character
+<https://stackoverflow.com/questions/1547899/which-characters-make-a-url-invalid/13500078>
