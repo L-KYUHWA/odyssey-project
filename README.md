@@ -18,6 +18,9 @@ cd ~/odyssey/module-service/build/libs
 
 java -jar ${jarFile Path}
 
+- down load jar : <https://github.com/L-KYUHWA/odyssey-project/blob/master/module-service-0.0.1.jar>
+
+
 ### Vm option
 -Dspring.profiles.active={local | develop | production}
 - local : 로컬 개발 시 사용
