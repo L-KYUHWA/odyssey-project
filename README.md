@@ -18,6 +18,13 @@ cd ~/odyssey/module-service/build/libs
 
 java -jar ${jarFile Path}
 
+### Vm option
+-Dspring.profiles.active={local | develop | production}
+- local : 로컬 개발 시 사용
+- develop : dev server 운영 시 사용
+- production : real server 운영 시 사용
+
+
 ### Use Library
 - Vue Daum Map : https://github.com/okchangwon/vue-daum-map
 
