@@ -65,7 +65,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/js/**",
 						"/images/**",
 						"/console/**");
-//						,"/api/**");
 	}
 
 }

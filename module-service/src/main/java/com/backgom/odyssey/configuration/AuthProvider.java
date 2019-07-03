@@ -41,12 +41,12 @@ public class AuthProvider implements AuthenticationProvider {
 		MemberDto foundMember = memberQueryService.findByMember(memberDto);
 
 		if (Objects.isNull(foundMember)) {
-			log.error("{} is not exist or password is not equals", id);
+			log.info("[AuthProvider] ID:{} is not exist", id);
 			return null;
 		}
 
 		if (!bCryptPasswordEncoder.matches(pw, foundMember.getMemberPassword())) {
-			log.error("{} is not exist or password is not equals", id);
+			log.info("[AuthProvider] ID:{} is password is not equals", id);
 			return null;
 		}
 

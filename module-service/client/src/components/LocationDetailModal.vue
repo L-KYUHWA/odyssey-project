@@ -109,7 +109,6 @@
         const bounds = map.getBounds();
         const boundsStr = bounds.toString();
         this.mapObject = map;
-        this.mapObject.load();
       },
       onMapEvent(event, params) {
         //doNotThing

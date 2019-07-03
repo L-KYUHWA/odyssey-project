@@ -18,3 +18,13 @@ Vuejs Gradle Build Setting
 
 ### Build
 ./gradlew clean -Dspring.profiles.active=local bootjar
+
+
+### Login Account
+- Member : windsp7 - 1234
+- Member : kakao - 4321
+
+
+
+
+C:\Users\LEE KYUHWA\IdeaProjects\odyssey\module-service\build\libs

@@ -34,9 +34,4 @@ public class OdysseyConfiguration implements WebMvcConfigurer {
 		return registrationBean;
 	}
 
-//	@Bean
-//	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-//		return new PropertySourcesPlaceholderConfigurer();
-//	}
-
 }

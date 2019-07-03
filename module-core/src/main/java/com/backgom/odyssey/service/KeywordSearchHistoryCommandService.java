@@ -17,9 +17,9 @@ public class KeywordSearchHistoryCommandService {
 	@Autowired
 	private KeywordSearchHistoryRepository repository;
 
-	public void saveHistory(KeywordSearchHistoryDto historyDto) {
+	public KeywordSearchHistoryDto saveHistory(KeywordSearchHistoryDto historyDto) {
 		KeywordSearchHistoryEntity entity = converter.convertToNewEntity(historyDto);
-		repository.save(entity);
+		return converter.convertDtoFromEntity(repository.save(entity));
 	}
 
 }

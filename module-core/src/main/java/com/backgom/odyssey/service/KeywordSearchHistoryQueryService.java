@@ -33,8 +33,9 @@ public class KeywordSearchHistoryQueryService {
 	}
 
 	public List<KeywordSearchHistoryDto> findByRecentlyMyKeywords() {
-		Pageable limitPageable = PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE);
-		limitPageable.getSort().and(new Sort(Sort.Direction.ASC, "modifiedAt"));
+		Sort sort = new Sort(Sort.Direction.DESC, "modifiedAt");
+		Pageable limitPageable = PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE, sort);
+
 		String loginMember = SecurityContext.getLoginMember();
 		List<KeywordSearchHistoryEntity> myRecentlyKeywordList = repository.findByMemberId(loginMember, limitPageable);
 		return converter.convertFromEntities(myRecentlyKeywordList);

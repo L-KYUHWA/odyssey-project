@@ -20,10 +20,10 @@ public class MemberCommandService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public MemberEntity saveMember(MemberDto memberDto) {
+	public MemberDto saveMember(MemberDto memberDto) {
 		MemberEntity entity = converter.convertToNewEntity(memberDto);
 		entity.setMemberPassword(bCryptPasswordEncoder.encode(entity.getMemberPassword()));
-		return memberRepository.save(entity);
+		return converter.convertDtoFromEntity(memberRepository.save(entity));
 	}
 
 }
