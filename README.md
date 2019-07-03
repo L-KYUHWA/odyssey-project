@@ -1,30 +1,23 @@
 ### Front Build
-- 1. npm install (dependency download)
-- 2. npm run dev  (vue test run)
-- 2. npm run build (frontend build)
+- npm install (dependency download)
+- npm run dev  (vue test run)
+- npm run build (frontend build)
 
-### Use Library
-fontawesome-free icon
-
-https://github.com/okchangwon/vue-daum-map
-
-### TODO
-Vuejs Gradle Build Setting
-지도 마커 추가
-테스트 케이스
-검색어 순위 리스트 노출
-나의 검색어 히스토리 리스트 노출
-
-
-### Build
+### Jar Build
 ./gradlew clean -Dspring.profiles.active=local bootjar
 
+### Run SpringBoot Application
+cd ~/odyssey/module-service/build/libs
+jar -jar ${jarFile Path}
+
+### Use Library
+- Vue Daum Map : https://github.com/okchangwon/vue-daum-map
 
 ### Login Account
 - Member : windsp7 - 1234
 - Member : kakao - 4321
 
+### TODO 
+1. Vue-Daum-Map 라이브러리 버그
+Modal을 이용해 Component 생성시 1회만 정상작동 함 Map 객채에 위,경도 데이터 정상 맵핑 확인 했으나 맵로딩이 일부만 이루어짐 
 
-
-
-C:\Users\LEE KYUHWA\IdeaProjects\odyssey\module-service\build\libs

@@ -6,16 +6,16 @@
     v-model="show">
     <div>
       <h5>Place Name :
-        <b-badge variant="light">{{setPlaceName}}</b-badge>
+        <b-badge variant="light">{{setPlaceName()}}</b-badge>
       </h5>
       <h5>New Address :
-        <b-badge variant="light">{{setNewAddress}}</b-badge>
+        <b-badge variant="light">{{setNewAddress()}}</b-badge>
       </h5>
       <h5>Legacy Address :
-        <b-badge variant="light">{{setLegacyAddress}}</b-badge>
+        <b-badge variant="light">{{setLegacyAddress()}}</b-badge>
       </h5>
       <h5>Phone Number :
-        <b-badge variant="light">{{setPhoneNumber}}</b-badge>
+        <b-badge variant="light">{{setPhoneNumber()}}</b-badge>
       </h5>
     </div>
     <vue-kakao-map
@@ -53,32 +53,6 @@
   export default {
     name: "LocationDetailModal",
     components: {VueKakaoMap},
-    computed: {
-      setPlaceName() {
-        if (this.selectedItem.place_name) {
-          return this.selectedItem.place_name;
-        }
-        return '';
-      },
-      setNewAddress() {
-        if (this.selectedItem.road_address_name) {
-          return this.selectedItem.road_address_name;
-        }
-        return '';
-      },
-      setLegacyAddress() {
-        if (this.selectedItem.address_name) {
-          return this.selectedItem.address_name;
-        }
-        return '';
-      },
-      setPhoneNumber() {
-        if (this.selectedItem.phone) {
-          return this.selectedItem.phone;
-        }
-        return '';
-      }
-    },
     data() {
       return {
         show: false,
@@ -113,9 +87,29 @@
       onMapEvent(event, params) {
         //doNotThing
       },
-      onReset() {
-        console.log(this.$refs.kakaoMap);
-        this.$refs.kakaoMap.resetMap();
+      setPlaceName() {
+        if (this.selectedItem.place_name) {
+          return this.selectedItem.place_name;
+        }
+        return '';
+      },
+      setNewAddress() {
+        if (this.selectedItem.road_address_name) {
+          return this.selectedItem.road_address_name;
+        }
+        return '';
+      },
+      setLegacyAddress() {
+        if (this.selectedItem.address_name) {
+          return this.selectedItem.address_name;
+        }
+        return '';
+      },
+      setPhoneNumber() {
+        if (this.selectedItem.phone) {
+          return this.selectedItem.phone;
+        }
+        return '';
       }
     }
   }
