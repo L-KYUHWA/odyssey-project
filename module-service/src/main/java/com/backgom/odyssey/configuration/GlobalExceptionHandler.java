@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	protected ResponseEntity handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
 		log.error("handleHttpRequestMethodNotSupportedException", e);
-		return new ResponseEntity(StatusCode.UN_SUPPORT_URL);
+		return new ResponseEntity(StatusCode.UNSUPPORTED_URL);
 	}
 
 	@ExceptionHandler(AuthException.class)

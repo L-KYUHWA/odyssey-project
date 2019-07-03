@@ -114,13 +114,14 @@
         this.$axios.get(`${searchUrl}`)
           .then((result) => {
 
-            if (result.data.statusCode !== 'SUCCESS') {
+            if (result.data.statusCode !== 'S001') {
               console.log("search request error : " + result);
               return;
             }
 
-            this.searchResult = result.data.response.documents;
-            this.totalItemCount = result.data.response.meta.total_count;
+            const parseResult = JSON.parse(result.data.response);
+            this.searchResult = parseResult.documents;
+            this.totalItemCount = parseResult.meta.total_count;
           })
           .then(() => {
             this.$refs.keywordRanking.updateList();

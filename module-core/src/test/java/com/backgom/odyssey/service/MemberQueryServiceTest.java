@@ -2,6 +2,7 @@ package com.backgom.odyssey.service;
 
 import com.backgom.odyssey.converter.MemberDtoConverter;
 import com.backgom.odyssey.dto.MemberDto;
+import com.backgom.odyssey.dto.MemberRole;
 import com.backgom.odyssey.entity.MemberEntity;
 import com.backgom.odyssey.repository.MemberRepository;
 import org.junit.Before;
@@ -20,7 +21,7 @@ public class MemberQueryServiceTest {
 
 	private static final String TEST_MEMBER_ID = "testMember";
 	private static final String TEST_MEMBER_PW = "testPassword";
-	private static final String TEST_MEMBER_ROLE = "testRole";
+
 	@InjectMocks
 	private MemberQueryService sut;
 	@Mock
@@ -44,6 +45,6 @@ public class MemberQueryServiceTest {
 		return new MemberDto()
 				.setMemberId(TEST_MEMBER_ID)
 				.setMemberPassword(TEST_MEMBER_PW)
-				.setMemberRole(TEST_MEMBER_ROLE);
+				.setMemberRole(MemberRole.USER);
 	}
 }

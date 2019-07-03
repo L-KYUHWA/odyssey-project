@@ -23,7 +23,7 @@
         this.$axios.get(`${requestUrl}`)
           .then((result) => {
 
-            if (result.data.statusCode !== 'SUCCESS') {
+            if (result.data.statusCode !== 'S001') {
               console.log("keyword ranking request error : " + result);
               return;
             }

@@ -33,9 +33,13 @@ public class PlaceSearchProvider {
 	@Value("${kakao.rest_api.key}")
 	private String apiKey;
 
-	public Object findPlaces(KeywordSearchCondition keywordSearchCondition) {
+	public String findPlaces(KeywordSearchCondition keywordSearchCondition) {
 
-		if (Objects.isNull(keywordSearchCondition.getKeyword())) {
+		if (Objects.isNull(keywordSearchCondition)) {
+			return StringUtils.EMPTY;
+		}
+
+		if (StringUtils.isBlank(keywordSearchCondition.getKeyword())) {
 			return StringUtils.EMPTY;
 		}
 
@@ -46,7 +50,7 @@ public class PlaceSearchProvider {
 		try {
 			ResponseEntity<String> response = restTemplate.postForEntity(uri, httpEntity, String.class);
 			keywordHistoryService.saveKeywordHistory(keywordSearchCondition.getKeyword(), SecurityContext.getLoginMember());
-			return ObjectMapperHolder.readValue(response.getBody(), Object.class);
+			return ObjectMapperHolder.clone(response.getBody(), String.class);
 		} catch (Exception e) {
 			log.warn("[PlaceSearchProvider] Unable to fetch API", e);
 		}

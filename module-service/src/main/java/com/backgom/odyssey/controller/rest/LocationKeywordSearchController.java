@@ -16,8 +16,7 @@ public class LocationKeywordSearchController {
 	@GetMapping("search")
 	@ResponseBody
 	public ResponseEntity search(@ModelAttribute KeywordSearchCondition keywordSearchCondition) {
-		Object searchResult = placeSearchProvider.findPlaces(keywordSearchCondition);
-		return new ResponseEntity(searchResult);
+		return new ResponseEntity(placeSearchProvider.findPlaces(keywordSearchCondition));
 	}
 
 }

@@ -27,11 +27,6 @@ public class ObjectMapperHolder {
 		return readValue(json, typeReference);
 	}
 
-	public static <T> T clone(T source, Class<T> clazz) {
-		String json = writeValueAsString(source);
-		return readValue(json, clazz);
-	}
-
 	public static <T> T clone(String source, Class<T> clazz) {
 		String json = writeValueAsString(source);
 		return readValue(json, clazz);
@@ -43,7 +38,7 @@ public class ObjectMapperHolder {
 		try {
 			result = objectMapper.readValue(content, valueType);
 		} catch (IOException e) {
-			log.error("JSON deserialize Error {} to {}", content, valueType.getName());
+			log.error("JSON deserialize Error {} to {}", content, valueType.getName(), e);
 		}
 
 		return result;
