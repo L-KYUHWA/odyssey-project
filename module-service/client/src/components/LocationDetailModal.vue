@@ -6,16 +6,16 @@
     v-model="show">
     <div>
       <h5>Place Name :
-        <b-badge variant="light">{{setPlaceName()}}</b-badge>
+        <b-badge variant="light">{{setPlaceName}}</b-badge>
       </h5>
       <h5>New Address :
-        <b-badge variant="light">{{setNewAddress()}}</b-badge>
+        <b-badge variant="light">{{setNewAddress}}</b-badge>
       </h5>
       <h5>Legacy Address :
-        <b-badge variant="light">{{setLegacyAddress()}}</b-badge>
+        <b-badge variant="light">{{setLegacyAddress}}</b-badge>
       </h5>
       <h5>Phone Number :
-        <b-badge variant="light">{{setPhoneNumber()}}</b-badge>
+        <b-badge variant="light">{{setPhoneNumber}}</b-badge>
       </h5>
     </div>
     <vue-kakao-map
@@ -66,6 +66,48 @@
         markerInfo: null,
       }
     },
+    computed: {
+      setPlaceName() {
+        if (!this.selectedItem) {
+          return '';
+        }
+
+        if (!this.selectedItem.place_name) {
+          return '';
+        }
+        return this.selectedItem.place_name;
+      },
+      setNewAddress() {
+        if (!this.selectedItem) {
+          return '';
+        }
+
+        if (!this.selectedItem.road_address_name) {
+          return '';
+        }
+        return this.selectedItem.road_address_name;
+      },
+      setLegacyAddress() {
+        if (!this.selectedItem) {
+          return '';
+        }
+
+        if (!this.selectedItem.address_name) {
+          return '';
+        }
+        return this.selectedItem.address_name;
+      },
+      setPhoneNumber() {
+        if (!this.selectedItem) {
+          return '';
+        }
+
+        if (!this.selectedItem.phone) {
+          return '';
+        }
+        return this.selectedItem.phone;
+      }
+    },
     methods: {
       showModal(selectedItem) {
         this.selectedItem = selectedItem;
@@ -86,30 +128,6 @@
       },
       onMapEvent(event, params) {
         //doNotThing
-      },
-      setPlaceName() {
-        if (this.selectedItem.place_name) {
-          return this.selectedItem.place_name;
-        }
-        return '';
-      },
-      setNewAddress() {
-        if (this.selectedItem.road_address_name) {
-          return this.selectedItem.road_address_name;
-        }
-        return '';
-      },
-      setLegacyAddress() {
-        if (this.selectedItem.address_name) {
-          return this.selectedItem.address_name;
-        }
-        return '';
-      },
-      setPhoneNumber() {
-        if (this.selectedItem.phone) {
-          return this.selectedItem.phone;
-        }
-        return '';
       }
     }
   }
